@@ -1,25 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<h1>Bienvenido aquí una lista de autores</h1>
+<head>
+	<meta charset="UTF-8"/>
+</head>
 
-    <table border="1">
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>edad</th>
-        <th>email</th>
-        <th></th>
-      </tr>
-      <tr th:each="autor : ${autores}">
-        <td th:text="${autor.id}">Onions</td>
-        <td th:text="${autor.nombre}">Onions</td>
-        <td th:text="${autor.edad}">2.41</td>
-        <td th:text="${autor.email}">yes</td>
-        <td>Detalle</td>
-      </tr>
-    </table>
-	
+<body>
+	<h1>InformaciÃ³n de autores</h1>
 
+    <p th:text="${autor.id}">Id</p>
+    <p th:text="${autor.nombre}">Nombre</p>
+    <p th:text="${autor.edad}">edad</tpd>
+    <p th:text="${autor.email}">email</p>
+
+</body>
 </html>
 
 
