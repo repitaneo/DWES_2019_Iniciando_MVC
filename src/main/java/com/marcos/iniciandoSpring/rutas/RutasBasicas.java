@@ -39,10 +39,10 @@ public class RutasBasicas {
 									Model model) {
 	*/
 
-	@GetMapping("/start")
+	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
-		List<Autor> listaAutores = ListaAutores.contruirLista();
+		List<Autor> listaAutores = ListaAutores.getLista();
 		model.addAttribute("autores",listaAutores);
 
 		return "hola";

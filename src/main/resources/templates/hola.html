@@ -1,10 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<h1>Bienvenido aquí una lista de autores</h1>
+	<head>
+		<meta charset="UTF-8"/>
+	</head>
+	
+	<body>
+	<h1 th:text="#{hola.title}">Bienvenido aquÃ­ una lista de autores</h1>
 
     <table border="1">
       <tr>
-        <th>ID</th>
+        <th th:text="#{hola.id}">ID</th>
         <th>Nombre</th>
         <th>edad</th>
         <th>email</th>
@@ -19,7 +24,7 @@
       </tr>
     </table>
 	
-
+	</body>
 </html>
 
 

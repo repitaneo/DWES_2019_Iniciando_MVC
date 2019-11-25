@@ -6,26 +6,10 @@ import java.util.List;
 public class ListaAutores {
 
 	
-	private static ArrayList<Autor> lista = new ArrayList<Autor>();
+	private static ArrayList<Autor> lista = null;
 
-
-	/**
-	 * Devuelve un autor en concreto
-	 * @param id
-	 * @return
-	 */
-	public static Autor getAutor(int id) {
-		
-		return lista.get(id);
-	}
 	
-	
-	
-	/**
-	 * Devuleve a todos los autores
-	 * @return
-	 */
-	public static List<Autor> contruirLista() {
+	private ListaAutores() {
 		
 		Autor autor = new Autor();
 		autor.setId(0);
@@ -56,9 +40,89 @@ public class ListaAutores {
 		autor4.setNombre("Orson Scott Card");
 		autor4.setEdad(62);
 		autor4.setEmail("orson@educastur.org");
-		lista.add(autor4);	
+		lista.add(autor4);		
 		
+	}
+	
+
+
+	
+	
+	/**
+	 * Devuleve a todos los autores
+	 * @return
+	 */
+	public static List<Autor> getLista() {
+		
+		if(lista==null) {
+			
+			new ListaAutores();
+		}
 		
 		return lista;
 	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Devuelve un autor en concreto, si lo encuentra
+	 * @param id
+	 * @return
+	 */
+	public static Autor getAutor(int idBuscado) {
+		
+		int dondeEsta = buscarDondeEsta(idBuscado);
+		if(dondeEsta>=0) {
+			
+			return lista.get(dondeEsta);
+		}
+		else return null;
+	}	
+	
+	
+	
+	
+	/**
+	 * Borra un objeto
+	 * @param idBuscado
+	 */
+	public static void del(int idBuscado) {
+		
+		int dondeEsta = buscarDondeEsta(idBuscado);
+		if(dondeEsta>=0) {
+			
+			lista.remove(dondeEsta);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param idBuscado
+	 * @return
+	 */
+	private static int buscarDondeEsta(int idBuscado) {
+		
+		boolean encontrado = false;
+		
+		int indice = 0;
+		while((!encontrado)&&(indice<lista.size())) {
+			
+			if(lista.get(indice).getId()==idBuscado) {
+				
+				encontrado = true;
+			}
+			else indice ++;
+		}
+		if(encontrado) return indice; else return -1;
+	}	
+	
 }
