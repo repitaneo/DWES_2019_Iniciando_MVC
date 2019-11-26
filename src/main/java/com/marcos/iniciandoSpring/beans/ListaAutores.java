@@ -14,7 +14,7 @@ public class ListaAutores {
 		lista = new ArrayList();
 		
 		Autor autor = new Autor();
-		autor.setId(0);
+		autor.setId(getIdNoRepetido());
 		autor.setNombre("Ket Follet");
 		autor.setEdad(70);
 		autor.setEmail("kent@educastur.org");
@@ -22,7 +22,7 @@ public class ListaAutores {
 		
 
 		Autor autor2 = new Autor();
-		autor2.setId(10);
+		autor2.setId(getIdNoRepetido());
 		autor2.setNombre("JK Rowling");
 		autor2.setEdad(58);
 		autor2.setEmail("jk@educastur.org");
@@ -30,7 +30,7 @@ public class ListaAutores {
 		
 
 		Autor autor3 = new Autor();
-		autor3.setId(20);
+		autor3.setId(getIdNoRepetido());
 		autor3.setNombre("Perez Reverte");
 		autor3.setEdad(62);
 		autor3.setEmail("aurturo@educastur.org");
@@ -38,7 +38,7 @@ public class ListaAutores {
 		
 
 		Autor autor4 = new Autor();
-		autor4.setId(30);
+		autor4.setId(getIdNoRepetido());
 		autor4.setNombre("Orson Scott Card");
 		autor4.setEdad(62);
 		autor4.setEmail("orson@educastur.org");
@@ -50,6 +50,22 @@ public class ListaAutores {
 
 	
 	
+	private int getIdNoRepetido() {
+		
+		int numero = (int)(Math.random()*100)+1;
+		
+		// busco hasta que no lo encuentro
+		while(buscarDondeEsta(numero)>=0) {
+
+			numero = (int)(Math.random()*100)+1;
+		}
+		return numero;
+	}
+
+
+
+
+
 	/**
 	 * Devuleve a todos los autores
 	 * @return
@@ -120,19 +136,24 @@ public class ListaAutores {
 	/**
 	 * 
 	 * @param idBuscado
-	 * @return
+	 * @return posición en el arrayList donde se encuentra
 	 */
 	private static int buscarDondeEsta(int idBuscado) {
 		
+		// iniciamos con una bandera indicando que no está encontrado
 		boolean encontrado = false;
 		
+		
 		int indice = 0;
+		// mientras que no se encuentra y no llego al final
 		while((!encontrado)&&(indice<lista.size())) {
 			
+			// lo voy buscando
 			if(lista.get(indice).getId()==idBuscado) {
 				
 				encontrado = true;
 			}
+			// y si no aparece, avanzo
 			else indice ++;
 		}
 		if(encontrado) return indice; else return -1;

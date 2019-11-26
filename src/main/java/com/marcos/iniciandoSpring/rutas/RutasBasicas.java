@@ -66,6 +66,20 @@ public class RutasBasicas {
 	
 	
 	
+
+	
+	@GetMapping("/eliminarAutor/{id}")
+	public String eliminarAutor(	@PathVariable Integer id,
+									Model model) {
+		
+		ListaAutores.del(id);
+		List<Autor> listaAutores = ListaAutores.getLista();
+		model.addAttribute("autores",listaAutores);
+
+		
+		return "hola"; //html
+	}		
+	
 	
 	
 	

@@ -14,13 +14,15 @@
         <th>edad</th>
         <th>email</th>
         <th></th>
+        <th></th>
       </tr>
       <tr th:each="autor : ${autores}">
-        <td th:text="${autor.id}">Onions</td>
-        <td th:text="${autor.nombre}">Onions</td>
+        <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
+        <td th:text="${autor.nombre}"></td>
         <td th:text="${autor.edad}">2.41</td>
         <td th:text="${autor.email}">yes</td>
-        <td>Detalle</td>
+        <td><a href="#" th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
+        <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a></td>
       </tr>
     </table>
 	
