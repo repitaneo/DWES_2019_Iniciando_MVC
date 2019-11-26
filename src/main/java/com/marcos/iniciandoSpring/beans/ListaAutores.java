@@ -6,12 +6,13 @@ import java.util.List;
 public class ListaAutores {
 
 	
-	private static ArrayList<Autor> lista = null;
-
+	private ArrayList<Autor> lista = null;
+	private static ListaAutores listaAutores = null;
+	
 	
 	private ListaAutores() {
 		
-		lista = new ArrayList();
+		lista = new ArrayList<Autor>();
 		
 		Autor autor = new Autor();
 		autor.setId(getIdNoRepetido());
@@ -48,8 +49,21 @@ public class ListaAutores {
 	
 
 
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Autor> getDatos() {
+		
+		return lista;
+	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	private int getIdNoRepetido() {
 		
 		int numero = (int)(Math.random()*100)+1;
@@ -70,14 +84,14 @@ public class ListaAutores {
 	 * Devuleve a todos los autores
 	 * @return
 	 */
-	public static List<Autor> getLista() {
+	public static ListaAutores getLista() {
 		
-		if(lista==null) {
+		if(listaAutores==null) {
 			
-			new ListaAutores();
+			listaAutores = new ListaAutores();
 		}
 		
-		return lista;
+		return listaAutores;
 	}
 	
 	
@@ -91,7 +105,7 @@ public class ListaAutores {
 	 * @param id
 	 * @return
 	 */
-	public static Autor getAutor(int idBuscado) {
+	public Autor getAutor(int idBuscado) {
 		
 		// busco donde está en el array
 		int dondeEsta = buscarDondeEsta(idBuscado);
@@ -116,7 +130,7 @@ public class ListaAutores {
 	 * Borra un objeto
 	 * @param idBuscado
 	 */
-	public static void del(int idBuscado) {
+	public void del(int idBuscado) {
 		
 		// pregunto que si existe el ID
 		int dondeEsta = buscarDondeEsta(idBuscado);
@@ -138,7 +152,7 @@ public class ListaAutores {
 	 * @param idBuscado
 	 * @return posición en el arrayList donde se encuentra
 	 */
-	private static int buscarDondeEsta(int idBuscado) {
+	private int buscarDondeEsta(int idBuscado) {
 		
 		// iniciamos con una bandera indicando que no está encontrado
 		boolean encontrado = false;

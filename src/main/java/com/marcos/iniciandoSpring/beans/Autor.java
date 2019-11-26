@@ -40,13 +40,13 @@ public class Autor {
 	}
 	
 	
-//	
-//	@Override
-//	public String toString() {
-//		return "Persona [nombre=" + nombre + ", edad=" + edad + "]";
-//	}
-//	
-//	
+	
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", edad=" + edad + "]";
+	}
+	
+	
 	
 	
 	

@@ -11,7 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,8 +44,8 @@ public class RutasBasicas {
 	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
-		List<Autor> listaAutores = ListaAutores.getLista();
-		model.addAttribute("autores",listaAutores);
+		ListaAutores lista = ListaAutores.getLista();
+		model.addAttribute("autores",lista.getDatos());
 
 		return "hola";
 	}
@@ -56,7 +58,8 @@ public class RutasBasicas {
 	public String verAutor(	@PathVariable Integer id,
 							Model model) {
 		
-		Autor autor = ListaAutores.getAutor(id);
+		ListaAutores lista = ListaAutores.getLista();
+		Autor autor = lista.getAutor(id);
 		model.addAttribute("autor",autor);
 		
 		return "autor"; //html
@@ -64,39 +67,38 @@ public class RutasBasicas {
 	
 	
 	
+	@GetMapping("/nuevoAutor")
+	public String nuevoAutor(Model model) {
+		
+		model.addAttribute("autor",new Autor());
+		
+		return "nuevoAutor"; 		
+		
+	}
 	
 	
-
+	@PostMapping("/addAutor")
+	public String addAutor(@ModelAttribute Autor autor) {
+		
+		System.out.println(autor);
+		
+		return "redirect:/"; 		
+		
+	}
+	
 	
 	@GetMapping("/eliminarAutor/{id}")
 	public String eliminarAutor(	@PathVariable Integer id,
 									Model model) {
 		
-		ListaAutores.del(id);
-		List<Autor> listaAutores = ListaAutores.getLista();
-		model.addAttribute("autores",listaAutores);
-
+		ListaAutores lista = ListaAutores.getLista();
+		lista.del(id);
+		
+		
+		model.addAttribute("autores",lista.getDatos());
 		
 		return "hola"; //html
 	}		
-	
-	
-	
-	
-	
-	
-	@GetMapping("/comienzo")
-	public String rutaCero(	@RequestParam(required=false) Integer id, 
-							@RequestParam(required=false) String nombre) {
-		
-		System.out.println("id: "+id);
-		System.out.println("nombre: "+nombre);
-		
-		return "cero";
-	}
-	
-	
-	
 	
 }
 

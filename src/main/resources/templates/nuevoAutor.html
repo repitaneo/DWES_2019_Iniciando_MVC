@@ -5,14 +5,19 @@
 </head>
 
 <body>
-	<h1>Información de autores</h1>
+	<h1>Nuevo autor</h1>
 
-    <p th:text="${autor.id}">Id</p>
-    <p th:text="${autor.nombre}">Nombre</p>
-    <p th:text="${autor.edad}">edad</tpd>
-    <p th:text="${autor.email}">email</p>
 
-	<p><a href="#" th:href="@{/}">Volver a la lista de autores</a></p>
+    <form action="#" th:action="@{/addAutor}" th:object="${autor}" method="post">
+    	
+    	<p>Nombre: <input type="text" th:field="*{nombre}" /></p>
+        <p>Edad: <input type="text" th:field="*{edad}" /></p>
+        <p>Email: <input type="email" th:field="*{email}" /></p>
+        
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+
+
 </body>
 </html>
 
