@@ -11,6 +11,8 @@ public class ListaAutores {
 	
 	private ListaAutores() {
 		
+		lista = new ArrayList();
+		
 		Autor autor = new Autor();
 		autor.setId(0);
 		autor.setNombre("Ket Follet");
@@ -20,7 +22,7 @@ public class ListaAutores {
 		
 
 		Autor autor2 = new Autor();
-		autor2.setId(1);
+		autor2.setId(10);
 		autor2.setNombre("JK Rowling");
 		autor2.setEdad(58);
 		autor2.setEmail("jk@educastur.org");
@@ -28,7 +30,7 @@ public class ListaAutores {
 		
 
 		Autor autor3 = new Autor();
-		autor3.setId(2);
+		autor3.setId(20);
 		autor3.setNombre("Perez Reverte");
 		autor3.setEdad(62);
 		autor3.setEmail("aurturo@educastur.org");
@@ -36,7 +38,7 @@ public class ListaAutores {
 		
 
 		Autor autor4 = new Autor();
-		autor4.setId(3);
+		autor4.setId(30);
 		autor4.setNombre("Orson Scott Card");
 		autor4.setEdad(62);
 		autor4.setEmail("orson@educastur.org");
@@ -75,7 +77,10 @@ public class ListaAutores {
 	 */
 	public static Autor getAutor(int idBuscado) {
 		
+		// busco donde está en el array
 		int dondeEsta = buscarDondeEsta(idBuscado);
+		
+		// si me devuelve una posición válida
 		if(dondeEsta>=0) {
 			
 			return lista.get(dondeEsta);
@@ -86,13 +91,21 @@ public class ListaAutores {
 	
 	
 	
+	
+	
+	
+	
+	
 	/**
 	 * Borra un objeto
 	 * @param idBuscado
 	 */
 	public static void del(int idBuscado) {
 		
+		// pregunto que si existe el ID
 		int dondeEsta = buscarDondeEsta(idBuscado);
+		
+		// si lo encuentra, lo borra
 		if(dondeEsta>=0) {
 			
 			lista.remove(dondeEsta);
