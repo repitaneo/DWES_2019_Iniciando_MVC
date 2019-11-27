@@ -31,6 +31,7 @@ public class RutasBasicas {
 	Autor juan;
 	
 	
+	private ListaAutores lista = ListaAutores.getLista();
 	
 	
 	
@@ -57,7 +58,6 @@ public class RutasBasicas {
 	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
-		ListaAutores lista = ListaAutores.getLista();
 		model.addAttribute("autores",lista.getDatos());
 
 		return "hola";
@@ -82,7 +82,6 @@ public class RutasBasicas {
 	public String verAutor(	@PathVariable Integer id,
 							Model model) {
 		
-		ListaAutores lista = ListaAutores.getLista();
 		Autor autor = lista.getAutor(id);
 		model.addAttribute("autor",autor);
 		
@@ -111,7 +110,6 @@ public class RutasBasicas {
 	public String eliminarAutor(	@PathVariable Integer id,
 									Model model) {
 		
-		ListaAutores lista = ListaAutores.getLista();
 		lista.del(id);
 		
 		/*
@@ -151,7 +149,6 @@ public class RutasBasicas {
 	public String nuevoAutor(Model model) {
 		
 		model.addAttribute("autor",new Autor());
-		model.addAttribute("nombre",new String());
 		
 		return "nuevoAutor"; // html del formulario nuevo autor		
 		
@@ -160,7 +157,6 @@ public class RutasBasicas {
 	@PostMapping("/addAutor")
 	public String addAutor(@ModelAttribute Autor autor) {
 		
-		ListaAutores lista = ListaAutores.getLista();
 		lista.addAutor(autor);
 		
 		return "redirect:/"; 		
@@ -168,6 +164,49 @@ public class RutasBasicas {
 	}
 		
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * 	E D I T A R     A U T O R E S 
+	 * ************************************
+	 * ************************************
+	 */
+	@GetMapping("/editarAutor/{id}")
+	public String editarAutor(	@PathVariable Integer id,
+								Model model) {
+		
+		Autor autor = lista.getAutor(id);
+		model.addAttribute("autor",autor);
+		
+		return "editarAutor"; // html del formulario editar autor		
+	}
+
+	
+	
+	
+	@PostMapping("/updateAutor")
+	public String updateAutor(@ModelAttribute Autor autor) {
+		
+		lista.updateAutor(autor);
+		
+		return "redirect:/"; 		
+		
+	}
+		
+		
 	
 }
 

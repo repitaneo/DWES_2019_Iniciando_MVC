@@ -71,8 +71,10 @@ public class ListaAutores {
 	 * @param autor
 	 */
 	public void updateAutor(Autor autor) {
-		
+
 		int posicion = buscarDondeEsta(autor.getId());
+
+		
 		lista.set(posicion, autor);
 	}
 	

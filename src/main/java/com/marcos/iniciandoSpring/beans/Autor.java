@@ -43,7 +43,7 @@ public class Autor {
 	
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", edad=" + edad + "]";
+		return "Persona [("+id+") nombre=" + nombre + ", edad=" + edad + "]";
 	}
 	
 	

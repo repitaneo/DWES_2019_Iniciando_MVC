@@ -16,6 +16,7 @@
         <th>email</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
       <tr th:each="autor : ${autores}">
         <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
@@ -24,6 +25,7 @@
         <td th:text="${autor.email}">yes</td>
         <td><a href="#" th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
         <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a></td>
+        <td><a href="#" th:href="@{/editarAutor/{id}(id=${autor.id})}">Editar</a></td>
       </tr>
     </table>
 	
