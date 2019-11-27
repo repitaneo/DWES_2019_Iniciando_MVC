@@ -41,6 +41,19 @@ public class RutasBasicas {
 									Model model) {
 	*/
 
+	
+	
+	
+	
+	/*
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * L I S T A N D O    A U T O R E S 
+	 * ************************************
+	 * ************************************
+	 */
 	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
@@ -54,6 +67,17 @@ public class RutasBasicas {
 
 	
 	
+	
+	
+	/*
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * D E T A L L E    A U T O R 
+	 * ************************************
+	 * ************************************
+	 */
 	@GetMapping("/autores/{id}")
 	public String verAutor(	@PathVariable Integer id,
 							Model model) {
@@ -67,6 +91,57 @@ public class RutasBasicas {
 	
 	
 	
+	
+	
+	
+
+	
+	
+	/*
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * E L I M I N A N D O    A U T O R E S 
+	 * ************************************
+	 * ************************************
+	 */
+	
+	@GetMapping("/eliminarAutor/{id}")
+	public String eliminarAutor(	@PathVariable Integer id,
+									Model model) {
+		
+		ListaAutores lista = ListaAutores.getLista();
+		lista.del(id);
+		
+		
+		model.addAttribute("autores",lista.getDatos());
+		
+		return "hola"; //html
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * ************************************
+	 * A Ñ A D I E N D O     A U T O R E S 
+	 * ************************************
+	 * ************************************
+	 */
 	@GetMapping("/nuevoAutor")
 	public String nuevoAutor(Model model) {
 		
@@ -85,20 +160,8 @@ public class RutasBasicas {
 		return "redirect:/"; 		
 		
 	}
+		
 	
-	
-	@GetMapping("/eliminarAutor/{id}")
-	public String eliminarAutor(	@PathVariable Integer id,
-									Model model) {
-		
-		ListaAutores lista = ListaAutores.getLista();
-		lista.del(id);
-		
-		
-		model.addAttribute("autores",lista.getDatos());
-		
-		return "hola"; //html
-	}		
 	
 }
 

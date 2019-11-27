@@ -13,38 +13,6 @@ public class ListaAutores {
 	private ListaAutores() {
 		
 		lista = new ArrayList<Autor>();
-		
-		Autor autor = new Autor();
-		autor.setId(getIdNoRepetido());
-		autor.setNombre("Ket Follet");
-		autor.setEdad(70);
-		autor.setEmail("kent@educastur.org");
-		lista.add(autor);
-		
-
-		Autor autor2 = new Autor();
-		autor2.setId(getIdNoRepetido());
-		autor2.setNombre("JK Rowling");
-		autor2.setEdad(58);
-		autor2.setEmail("jk@educastur.org");
-		lista.add(autor2);		
-		
-
-		Autor autor3 = new Autor();
-		autor3.setId(getIdNoRepetido());
-		autor3.setNombre("Perez Reverte");
-		autor3.setEdad(62);
-		autor3.setEmail("aurturo@educastur.org");
-		lista.add(autor3);		
-		
-
-		Autor autor4 = new Autor();
-		autor4.setId(getIdNoRepetido());
-		autor4.setNombre("Orson Scott Card");
-		autor4.setEdad(62);
-		autor4.setEmail("orson@educastur.org");
-		lista.add(autor4);		
-		
 	}
 	
 
@@ -57,45 +25,6 @@ public class ListaAutores {
 		
 		return lista;
 	}
-	
-	
-	
-	/**
-	 * 
-	 * @return
-	 */
-	private int getIdNoRepetido() {
-		
-		int numero = (int)(Math.random()*100)+1;
-		
-		// busco hasta que no lo encuentro
-		while(buscarDondeEsta(numero)>=0) {
-
-			numero = (int)(Math.random()*100)+1;
-		}
-		return numero;
-	}
-
-
-
-
-
-	/**
-	 * Devuleve a todos los autores
-	 * @return
-	 */
-	public static ListaAutores getLista() {
-		
-		if(listaAutores==null) {
-			
-			listaAutores = new ListaAutores();
-		}
-		
-		return listaAutores;
-	}
-	
-	
-	
 	
 	
 	
@@ -120,8 +49,32 @@ public class ListaAutores {
 	
 	
 	
+	/**
+	 * Añade un autor a la lista (a.k.a. Modelo)
+	 * 
+	 * @param autor
+	 */
+	public void addAutor(Autor autor) {
+
+		
+		autor.setId(getIdNoRepetido());
+		lista.add(autor);
+	}
 	
 	
+	
+	
+	
+	/**
+	 * Actualiza un autor buscando primero su posicion en la lista
+	 * 
+	 * @param autor
+	 */
+	public void updateAutor(Autor autor) {
+		
+		int posicion = buscarDondeEsta(autor.getId());
+		lista.set(posicion, autor);
+	}
 	
 	
 	
@@ -141,6 +94,7 @@ public class ListaAutores {
 			lista.remove(dondeEsta);
 		}
 	}
+	
 	
 	
 	
@@ -172,5 +126,49 @@ public class ListaAutores {
 		}
 		if(encontrado) return indice; else return -1;
 	}	
+
+	
+
+	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private int getIdNoRepetido() {
+		
+		int numero = (int)(Math.random()*100)+1;
+		
+		// busco hasta que no lo encuentro
+		while(buscarDondeEsta(numero)>=0) {
+
+			numero = (int)(Math.random()*100)+1;
+		}
+		return numero;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Petición del singleton
+	 * @return
+	 */
+	public static ListaAutores getLista() {
+		
+		if(listaAutores==null) {
+			
+			listaAutores = new ListaAutores();
+		}
+		
+		return listaAutores;
+	}
+	
+		
 	
 }
