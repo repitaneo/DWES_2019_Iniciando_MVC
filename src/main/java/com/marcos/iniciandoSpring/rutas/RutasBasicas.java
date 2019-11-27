@@ -114,10 +114,15 @@ public class RutasBasicas {
 		ListaAutores lista = ListaAutores.getLista();
 		lista.del(id);
 		
-		
+		/*
+		 * ME LO CURRO YO
+		 * 
 		model.addAttribute("autores",lista.getDatos());
 		
 		return "hola"; //html
+		 */
+		return("redirect:/");
+
 	}
 	
 	
@@ -146,16 +151,17 @@ public class RutasBasicas {
 	public String nuevoAutor(Model model) {
 		
 		model.addAttribute("autor",new Autor());
+		model.addAttribute("nombre",new String());
 		
-		return "nuevoAutor"; 		
+		return "nuevoAutor"; // html del formulario nuevo autor		
 		
 	}
-	
 	
 	@PostMapping("/addAutor")
 	public String addAutor(@ModelAttribute Autor autor) {
 		
-		System.out.println(autor);
+		ListaAutores lista = ListaAutores.getLista();
+		lista.addAutor(autor);
 		
 		return "redirect:/"; 		
 		

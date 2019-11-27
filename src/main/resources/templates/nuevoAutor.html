@@ -7,41 +7,20 @@
 <body>
 	<h1>Nuevo autor</h1>
 
-
     <form action="#" th:action="@{/addAutor}" th:object="${autor}" method="post">
     	
-    	<p>Nombre: <input type="text" th:field="*{nombre}" /></p>
-        <p>Edad: <input type="text" th:field="*{edad}" /></p>
-        <p>Email: <input type="email" th:field="*{email}" /></p>
+    	<p>Nombre: <input type="text" th:field="*{nombre}"/></p>
+        <p>Edad: <input type="number" placeholder="inserta una edad" th:field="*{edad}"/></p>
+        <p>Email: <input type="email" th:field="*{email}"/></p>
         
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        <p>	<input type="submit" value="Submit" /> 
+        	<input type="reset" value="Reset" />
+        </p>
     </form>
+
+
+
 
 
 </body>
 </html>
-
-
-
-
-	<!--
-	
-		codigo para imprimir un atributo suelto
-		  
-	<p th:text="'Hola ' + ${nombre}+' bienvenido'">Mi nombre</p>
-	<p th:text="'Tu edad es ' + ${edad}">24</p>
-	-->
-
-
-
-
-
-	<!-- 
-	
-		codigo para imprimir un objeto
-		
-	<p th:text="'Mira, un autor en mi web ' + ${autor.nombre}+' bienvenido'">Mi nombre</p>
-	<p th:text="'Autor, tu edad es ' + ${autor.edad}">edad</p>
-	<p th:text="'Autor, tu email es ' + ${autor.email}">email no encontrado</p>
-	
-	-->
