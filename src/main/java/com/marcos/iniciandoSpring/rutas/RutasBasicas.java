@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marcos.iniciandoSpring.beans.Autor;
+import com.marcos.iniciandoSpring.beans.Coche;
 import com.marcos.iniciandoSpring.beans.ListaAutores;
 
 @Controller
@@ -148,11 +149,16 @@ public class RutasBasicas {
 	@GetMapping("/nuevoAutor")
 	public String nuevoAutor(Model model) {
 		
+		ArrayList<Coche> listaCoches = crearListaCoches();
+		
+		model.addAttribute("coches",listaCoches);
 		model.addAttribute("autor",new Autor());
 		
 		return "nuevoAutor"; // html del formulario nuevo autor		
 		
 	}
+
+	
 	
 	@PostMapping("/addAutor")
 	public String addAutor(@ModelAttribute Autor autor) {
@@ -205,7 +211,25 @@ public class RutasBasicas {
 		return "redirect:/"; 		
 		
 	}
+	
+	
+	
+	
+	
+	private ArrayList<Coche> crearListaCoches() {
+		ArrayList<Coche> listaCoches = new ArrayList<Coche>();
+		Coche volvo = new Coche();
+		volvo.setId(1);
+		volvo.setMarca("Volvo");
 		
+		Coche ford = new Coche();
+		ford.setId(2);
+		ford.setMarca("Ford");
+		
+		listaCoches.add(volvo);
+		listaCoches.add(ford);
+		return listaCoches;
+	}	
 		
 	
 }
