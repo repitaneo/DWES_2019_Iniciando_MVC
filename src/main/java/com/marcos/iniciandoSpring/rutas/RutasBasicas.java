@@ -59,6 +59,9 @@ public class RutasBasicas {
 	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
+		ArrayList<Coche> listaCoches = crearListaCoches();
+		model.addAttribute("coches",listaCoches);
+		
 		model.addAttribute("autores",lista.getDatos());
 
 		return "hola";
@@ -193,6 +196,10 @@ public class RutasBasicas {
 	@GetMapping("/editarAutor/{id}")
 	public String editarAutor(	@PathVariable Integer id,
 								Model model) {
+
+		
+		ArrayList<Coche> listaCoches = crearListaCoches();
+		model.addAttribute("coches",listaCoches);
 		
 		Autor autor = lista.getAutor(id);
 		model.addAttribute("autor",autor);
