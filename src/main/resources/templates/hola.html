@@ -5,33 +5,64 @@
 	</head>
 	
 	<body>
-	<h1 th:text="#{hola.title}">Bienvenido aquí una lista de autores</h1>
-	<p>Hay <span th:text="${autores.size()}"></span> autores</p>
+			<h1 th:text="#{hola.title}">bla bla bla</h1>
+			<p th:text="#{hola.numeroAutores(${nombre})}">bla bla bla</p>
 
-    <table border="1">
-      <tr>
-        <th th:text="#{hola.tabla.id}">ID</th>
-        <th>Nombre</th>
-        <th>edad</th>
-        <th>email</th>
-        <th>coche</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr th:each="autor : ${autores}">
-        <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
-        <td th:text="${autor.nombre}"></td>
-        <td th:text="${autor.edad}">2.41</td>
-        <td th:text="${autor.email}">yes</td>
-        <td th:each="coche:${coches}" th:if="${coche.id}==${autor.coche}" th:text="${coche.marca}">Mercedes</td>
-        <td><a href="#" th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
-        <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a></td>
-        <td><a href="#" th:href="@{/editarAutor/{id}(id=${autor.id})}">Editar</a></td>
-      </tr>
-    </table>
+
+	<div th:switch="${#lists.isEmpty(autores)}">
+	  
+	  <div id="noHayNadie" th:case="true">
+	  
+	  		<p>No hay nadie</p>
+	  
+	  
+	  </div>
+	  <div id="hayAutores" th:case="false">
+			  
+		    <table border="1">
+		      <tr>
+		        <th th:text="#{hola.tabla.id}">ID</th>
+		        <th>Nombre</th>
+		        <th>edad</th>
+		        <th>email</th>
+		        <th>mensaje</th>
+		        <th>puntuacion</th>
+		        <th>carnet</th>
+		        <th>coche</th>
+		        <th></th>
+		        <th></th>
+		        <th></th>
+		      </tr>
+		      <tr th:each="autor : ${autores}">
+		        <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
+		        <td th:text="${autor.nombre}"></td>
+		        <td th:text="${autor.edad}">2.41</td>
+		        <td th:text="${autor.email}">yes</td>
+		        <td th:text="${autor.mensaje}">mensaje</td>
+		        <td th:text="${autor.puntuacion}">5</td>
+		        
+		        <td th:if="${autor.carnet}" th:text="'tengo carnet'">Mercedes</td>
+		        <td th:unless="${autor.carnet}" th:text="'NO tengo carnet'">Mercedes</td>
+		        
+		        <td th:each="coche:${coches}" th:if="${coche.id}==${autor.coche}" th:text="${coche.marca}">Mercedes</td>
+		        <td><a href="#" th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
+		        <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a></td>
+		        <td><a href="#" th:href="@{/editarAutor/{id}(id=${autor.id})}">Editar</a></td>
+		      </tr>
+		    </table>
+	  
+	  
+	  </div>
+	  
+	  <p><a href="#" th:href="@{/nuevoAutor}">Nuevo Autor</a></p>
+	  
+	</div>
+
+
 	
-	<p><a href="#" th:href="@{/nuevoAutor}">Nuevo Autor</a></p>
+	
+	
+
 	
 	</body>
 </html>

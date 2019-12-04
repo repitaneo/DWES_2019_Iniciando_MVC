@@ -8,12 +8,32 @@ public class Autor {
 	private Integer edad;
 	private String email;
 	private String coche;
-	
+	private String mensaje;
+	private Integer puntuacion;
+	private Boolean carnet;
 	
 	
 	
 	
 
+	public Boolean getCarnet() {
+		return carnet;
+	}
+	public void setCarnet(Boolean carnet) {
+		this.carnet = carnet;
+	}
+	public Integer getPuntuacion() {
+		return puntuacion;
+	}
+	public void setPuntuacion(Integer puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
 	public String getCoche() {
 		return coche;
 	}

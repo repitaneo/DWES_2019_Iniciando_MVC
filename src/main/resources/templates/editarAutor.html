@@ -20,7 +20,21 @@
 			</select>        
         </p>
         
-                
+         
+      	<p>
+	        <textarea th:field="*{mensaje}" rows="6" cols="20">
+				The cat was playing in the garden.
+			</textarea>
+        </p>    
+        
+           <p>
+	        <input type="range" th:field="*{puntuacion}" min="0" max="10">
+        </p>   
+        
+         <p>
+	        <input type="checkbox" th:field="*{carnet}"> Carnet
+        </p>                 
+                       
         <p>	<input type="submit" value="Submit" /> 
         	<input type="reset" value="Reset" />
         </p>

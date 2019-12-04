@@ -10,12 +10,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.marcos.iniciandoSpring.beans.Autor;
 import com.marcos.iniciandoSpring.beans.Coche;
@@ -57,14 +60,18 @@ public class RutasBasicas {
 	 * ************************************
 	 */
 	@GetMapping("/")
-	public String rutaBasicaInicial(Model model) {
+	public ModelAndView rutaBasicaInicial() {
 		
 		ArrayList<Coche> listaCoches = crearListaCoches();
-		model.addAttribute("coches",listaCoches);
 		
-		model.addAttribute("autores",lista.getDatos());
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("hola");
+		model.addObject("coches",listaCoches);
+		model.addObject("autores",lista.getDatos());
+		model.addObject("nombre", "Marcos");
 
-		return "hola";
+		return model;
 	}
 	
 	
@@ -110,8 +117,28 @@ public class RutasBasicas {
 	 * ************************************
 	 */
 	
-	@GetMapping("/eliminarAutor/{id}")
+	@DeleteMapping("/autor/{id}")
 	public String eliminarAutor(	@PathVariable Integer id,
+									Model model) {
+		
+		lista.del(id);
+		
+		/*
+		 * ME LO CURRO YO
+		 * 
+		model.addAttribute("autores",lista.getDatos());
+		
+		return "hola"; //html
+		 */
+		return("200");
+
+	}
+	
+	
+	
+	
+	@GetMapping("/eliminarAutor/{id}")
+	public String getDliminarAutor(	@PathVariable Integer id,
 									Model model) {
 		
 		lista.del(id);
@@ -125,8 +152,7 @@ public class RutasBasicas {
 		 */
 		return("redirect:/");
 
-	}
-	
+	}	
 	
 	
 	
