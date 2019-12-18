@@ -1,93 +1,165 @@
-<html xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		<meta charset="UTF-8"/>
-	</head>
-	
-	<body>
-			<h1 th:text="#{hola.title}">bla bla bla</h1>
-			<p th:text="#{hola.numeroAutores(${nombre})}">bla bla bla</p>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Agency - Start Bootstrap Theme</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="css/agency.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in" th:text="#{hola.title}">bla bla bla</div>
+        
+        <div class="mb-5"> <!--  mis datos -->
+			<div th:switch="${#lists.isEmpty(autores)}">
+			  <div id="noHayNadie" th:case="true">
+			  		<p>No hay nadie</p>
+			  </div>
+			  <div id="hayAutores" th:case="false">
+				    <table  class="table table-dark table-hover table-sm ">
+				      <tr>
+				        <th th:text="#{hola.tabla.id}">ID</th>
+				        <th>Nombre</th>
+				        <th>edad</th>
+				        <th>email</th>
+				        <th>mensaje</th>
+				        <th>puntuacion</th>
+				        <th>carnet</th>
+				        <th>coche</th>
+				        <th></th>
+				        <th></th>
+				        <th></th>
+				      </tr>
+				      <tr th:each="autor : ${autores}">
+				        <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
+				        <td th:text="${autor.nombre}"></td>
+				        <td th:text="${autor.edad}">2.41</td>
+				        <td th:text="${autor.email}">yes</td>
+				        <td th:text="${autor.mensaje}">mensaje</td>
+				        <td th:text="${autor.puntuacion}">5</td>
+				        
+				        <td th:if="${autor.carnet}" th:text="'tengo carnet'">Mercedes</td>
+				        <td th:unless="${autor.carnet}" th:text="'NO tengo carnet'">Mercedes</td>
+				        
+				        <td th:each="coche:${coches}" th:if="${coche.id}==${autor.coche}" th:text="${coche.marca}">Mercedes</td>
+				        <td><a type="button"  class="btn btn-light btn-sm"  th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
+				        <td><a type="button" class="btn btn-danger btn-sm" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a>
+				        <td><a type="button"  class="btn btn-info btn-sm" th:href="@{/editarAutor/{id}(id=${autor.id})}">Editar</a></td>
+				      </tr>
+				    </table>
+			  </div>
+			</div> 
+        </div><!--  fin de mis datos -->
+        
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services" th:href="@{/nuevoAutor}">Nuevo Autor</a>
+      </div>
+    </div>
+  </header>
 
 
-	<div th:switch="${#lists.isEmpty(autores)}">
-	  
-	  <div id="noHayNadie" th:case="true">
-	  
-	  		<p>No hay nadie</p>
-	  
-	  
-	  </div>
-	  <div id="hayAutores" th:case="false">
-			  
-		    <table border="1">
-		      <tr>
-		        <th th:text="#{hola.tabla.id}">ID</th>
-		        <th>Nombre</th>
-		        <th>edad</th>
-		        <th>email</th>
-		        <th>mensaje</th>
-		        <th>puntuacion</th>
-		        <th>carnet</th>
-		        <th>coche</th>
-		        <th></th>
-		        <th></th>
-		        <th></th>
-		      </tr>
-		      <tr th:each="autor : ${autores}">
-		        <td th:text="${autor.id}+' ['+${autorStat.count}+']'">Onions</td>
-		        <td th:text="${autor.nombre}"></td>
-		        <td th:text="${autor.edad}">2.41</td>
-		        <td th:text="${autor.email}">yes</td>
-		        <td th:text="${autor.mensaje}">mensaje</td>
-		        <td th:text="${autor.puntuacion}">5</td>
-		        
-		        <td th:if="${autor.carnet}" th:text="'tengo carnet'">Mercedes</td>
-		        <td th:unless="${autor.carnet}" th:text="'NO tengo carnet'">Mercedes</td>
-		        
-		        <td th:each="coche:${coches}" th:if="${coche.id}==${autor.coche}" th:text="${coche.marca}">Mercedes</td>
-		        <td><a href="#" th:href="@{/autores/{id}(id=${autor.id})}">Detalle</a></td>
-		        <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${autor.id})}">Eliminar</a></td>
-		        <td><a href="#" th:href="@{/editarAutor/{id}(id=${autor.id})}">Editar</a></td>
-		      </tr>
-		    </table>
-	  
-	  
-	  </div>
-	  
-	  <p><a href="#" th:href="@{/nuevoAutor}">Nuevo Autor</a></p>
-	  
-	</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Your Website 2019</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
+  
 
-	
-	
-	
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	
-	</body>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/agency.min.js"></script>
+
+</body>
+
 </html>
 
 
-
-
-	<!--
 	
-		codigo para imprimir un atributo suelto
-		  
-	<p th:text="'Hola ' + ${nombre}+' bienvenido'">Mi nombre</p>
-	<p th:text="'Tu edad es ' + ${edad}">24</p>
-	-->
-
-
-
-
-
-	<!-- 
 	
-		codigo para imprimir un objeto
-		
-	<p th:text="'Mira, un autor en mi web ' + ${autor.nombre}+' bienvenido'">Mi nombre</p>
-	<p th:text="'Autor, tu edad es ' + ${autor.edad}">edad</p>
-	<p th:text="'Autor, tu email es ' + ${autor.email}">email no encontrado</p>
 	
-	-->
